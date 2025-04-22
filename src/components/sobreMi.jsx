@@ -39,9 +39,9 @@ export default function SobreMi() {
                   <div><strong>Fecha Nacimiento:</strong> 26 Ago 2002</div>
                   <div><strong>Edad:</strong> 22 años</div>
                   <div><strong>Altura:</strong> 160 cm</div>
-                  <div><strong>Pierna hábil:</strong> Izquierda</div>
+                  <div><strong>Pierna hábil:</strong> Derecha</div>
                   <div><strong>Posición:</strong> Extremo Izquierdo</div>
-                  <div><strong>Dorsal:</strong> 7</div>
+                  <div><strong>Dorsal:</strong> 11</div>
                 </div>
               </div>
 

@@ -455,7 +455,7 @@ nav a:hover {
   /* Perfil vertical */
   .profile-content {
     position: relative !important;
-    top: 10;
+    top: 30;
     left: 0;
     transform: none;
     max-width: calc(100% - 2rem);
