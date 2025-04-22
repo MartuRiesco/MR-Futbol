@@ -1,36 +1,152 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ⚽ MR — Perfil Futbolístico Profesional
 
-## Getting Started
+**Zurdómetro** ha evolucionado a **"MR"**, una SPA personalizada para mostrar y registrar el rendimiento futbolístico de Martina Riesco, jugadora de Argentinos Juniors.
 
-First, run the development server:
+Este proyecto tiene como objetivo brindar una herramienta visual y de autoconocimiento deportivo, enfocada en destacar fortalezas, registrar partidos, y acompañar el crecimiento personal con ayuda de un psicólogo deportivo.
+
+---
+
+## 🧠 Tecnologías
+
+- **Next.js** (App Router)
+- **React.js**
+- **PostgreSQL** (con Prisma ORM)
+- **CSS Vanilla** (No Tailwind porque explotó)
+- **Vercel** (deployment más adelante)
+- **Chart.js** (para visualizaciones tipo radar)
+
+---
+
+## 📂 Estructura del Proyecto
+
+```
+zurdometro/
+├── public/
+│   ├── martina.jpg (foto)
+│   ├── aaaj.png (logo de Argentinos Juniors)
+│   └── field-map.png (mapa de calor estático)
+│
+├── src/
+│   ├── app/
+│   │   ├── page.jsx (landing principal)
+│   │   ├── api/
+│   │   │   └── crear-partido/route.js (handler POST)
+│   │   └── styles/
+│   │       └── globals.css (estilos principales)
+│   ├── components/
+│   │   ├── header.jsx
+│   │   ├── radarChart.jsx
+│   │   ├── playerSummary.jsx
+│   │   └── partidoForm.jsx
+│
+├── prisma/
+│   └── schema.prisma (modelo de BD)
+└── .env (configuración DB local)
+```
+
+---
+
+## 🗃️ Base de Datos
+
+### Modelo actual `Partido`:
+
+```prisma
+model Partido {
+  id               Int      @id @default(autoincrement())
+  fecha            DateTime
+  rival            String
+  posicion         String
+  minutos_jugados  Int
+  pases_totales    Int
+  pases_acertados  Int
+  createdAt        DateTime @default(now())
+}
+```
+
+> 💡 Los pases errados **no se guardan**: se calculan implícitamente como `pases_totales - pases_acertados`.
+
+---
+
+## 📉 Funcionalidades actuales
+
+### ✅ Sección Banner
+
+- Imagen de fondo tipo Hero con tu nombre, equipo, stats destacadas (goles, asistencias, pases).
+
+### ✅ Sección Sobre Mí
+
+- Foto tuya
+- Texto descriptivo
+- Radar Chart con atributos
+- Mapa de calor fijo con posición
+- Fortalezas y debilidades
+
+### ✅ Carga de Datos
+
+- Formulario funcional
+- Guarda partidos en la base
+- Campos:
+  - Fecha
+  - Rival
+  - Posición
+  - Minutos jugados
+  - Pases totales
+  - Pases acertados
+
+---
+
+## ⚠️ Cosas pendientes / backlog
+
+- [ ] Visualización dinámica de los datos cargados (estadísticas generales)
+- [ ] Listado de partidos jugados (tabla o tarjetas)
+- [ ] Scroll interno desde el menú (SPA completa)
+- [ ] Animaciones o feedback visual al guardar partido
+- [ ] Upload de videos de recortes
+- [ ] Modo oscuro (por facha)
+
+---
+
+## ⚙️ Configuración local
+
+1. Cloná el repo
+2. Instalá dependencias:
+
+```bash
+npm install
+```
+
+3. Configurá el archivo `.env`:
+
+```
+DATABASE_URL="postgresql://tu_usuario:tu_password@localhost:5432/zurdometro"
+```
+
+4. Iniciá Prisma y aplicá migraciones:
+
+```bash
+npx prisma generate
+npx prisma migrate dev --name init
+```
+
+5. Corré el servidor local:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 🔹 Capturas
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+> (Añadir screenshots del banner, sobre mí, y carga de partidos si se desea ilustrar)
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🧠 Bonus psicológico
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Este proyecto también sirve como acompañamiento emocional y refuerzo positivo basado en hechos reales. Cada gol registrado es una victoria contra la duda. Cada asistencia, una prueba de confianza. Esta no es solo una web: es tu *highlight reel mental*.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+> Con amor, código, y zurda letal. — Martina Riesco
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

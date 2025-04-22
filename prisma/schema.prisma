@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Partido {
+  id               Int      @id @default(autoincrement())
+  fecha            DateTime
+  rival            String
+  posicion         String
+  minutos_jugados  Int
+  pases_totales    Int      @default(0)
+  pases_acertados  Int      @default(0)
+  duelos_totales   Int      @default(0)
+  duelos_ganados   Int      @default(0)
+  centros          Int      @default(0)
+  centros_buenos   Int      @default(0)
+  existe           Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  eventos          Evento[]
+}
+
+
+model Evento {
+  id            Int      @id @default(autoincrement())
+  tiros_al_arco Int      @default(0)
+  goles         Int      @default(0)
+  asistencias   Int      @default(0)
+  imprevistos   Int?     // Lo dejamos opcional en caso de que no se ingrese valor
+  partidoId     Int
+  partido       Partido  @relation(fields: [partidoId], references: [id], onDelete: Cascade)
+}
